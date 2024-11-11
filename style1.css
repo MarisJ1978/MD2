@@ -133,7 +133,7 @@ input[type="password"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
 }
