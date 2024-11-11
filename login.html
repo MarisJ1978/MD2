@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pieslēgties</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Esi sveicināts ĶLUS</h1>
+            <p>Tavas laboratorijas uzskaites sistēma</p>
+            <div class="illustration">
+                <img src="lab-illustration.png" alt="Laboratory Illustration">
+            </div>
+        </div>
+        <div class="right-panel">
+            <a href="index.html" class="back-link">← Atpakaļ uz sākumlapu</a>
+            <h2>Pieslēgties</h2>
+            <p>Ķīmijas laboratorijas uzskaites sistēmai</p>
+            <form id="loginForm">
+                <label for="username">Lietotājvārds</label>
+                <input type="text" id="username" placeholder="Ievadīt lietotājvārdu" required>
+
+                <label for="password">Parole</label>
+                <input type="password" id="password" placeholder="Ievadīt paroli" required>
+					<button type="button" class="primary-btn" onclick="authenticateUser()">Pieslēgties</button>
+            </form>
+            <p class="register-text">Neesi vēl reģistrēts? <a href="#">Izveidot profilu</a></p>
+        </div>
+        <button class="error-btn">Ziņot par kļūdu</button>
+    </div>
+	<script>
+		async function authenticateUser() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('userdata.json')
+    .then(response => response.json())
+    .then(data => {
+      const user = data.users.find(user => user.vards === username && user.parole === password);
+
+      if (user) {
+        // Successful login
+        alert('Ielogošanās veiksmīga!');
+        // Redirect to another page or perform other actions
+        window.location.href = 'data.html'; // Replace with your desired page
+      } else {
+        // Invalid credentials
+        alert('Nepareizs lietotājvārds vai parole!');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      alert('Notika kļūda, lūdzu, mēģiniet vēlreiz.');
+    });
+        }
+    </script>
